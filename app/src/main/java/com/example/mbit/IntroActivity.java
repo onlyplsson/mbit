@@ -29,7 +29,7 @@ public class IntroActivity extends AppCompatActivity {
         }, 3000);
 
     }
-//daadada
+
     private void startWelcomeActivity() {
         Intent intent = new Intent(getApplicationContext(), WelcomeActivity.class);
         startActivity(intent);
