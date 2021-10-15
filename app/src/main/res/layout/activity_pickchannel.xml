@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ECF8FF"
+    android:orientation="vertical"
+    tools:context=".PickChannelActivity">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30sp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/pickchannel1" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="wrap_content"
+            android:layout_height="39dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:background="#000000FF"
+            app:srcCompat="@drawable/pickchannel2" />
+
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="4dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ISFP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ISFP"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ISFJ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ISFJ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ISTP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ISTP"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="50dp"
+                tools:layout_editor_absoluteX="104dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ISTJ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ISTJ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_INTP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="INTP"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteX="204dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_INTJ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="INTJ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_INFP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="INFP"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_INFJ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="INFJ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="50dp"
+                tools:layout_editor_absoluteX="304dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ESTP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ESTP"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/ESTJ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ESTJ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ESFP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ESFP"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="100dp"
+                tools:layout_editor_absoluteX="404dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ESFJ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ESFJ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ENTP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ENTP"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingTop="50dp"
+                tools:layout_editor_absoluteX="504dp"
+                tools:layout_editor_absoluteY="0dp">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ENTJ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ENTJ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_ENFP"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ENFP"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/ENFJ"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10sp"
+                    android:background="@drawable/circlebtn"
+                    android:text="ENFJ"
+                    android:textColor="#FFFFFF"
+                    android:textSize="20sp"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="2dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <LinearLayout
+        android:layout_width="360sp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_PickChannel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/pickchannelbtn"
+            android:text="선택"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>
