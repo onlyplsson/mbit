@@ -28,6 +28,7 @@
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SetNickActivity" />
         <activity android:name=".Configuration"/>
+        <activity android:name=".MainActivity"/>
 
         <meta-data
             android:name="preloaded_fonts"
