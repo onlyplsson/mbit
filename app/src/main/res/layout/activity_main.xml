@@ -6,49 +6,43 @@
     android:layout_height="match_parent"
     android:background="#ECF8FF"
     android:orientation="vertical"
-    tools:context=".TalkActivity">
+    tools:context=".MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:orientation="vertical"></LinearLayout>
+        android:layout_height="43dp"
+        android:orientation="horizontal">
 
-    <LinearLayout
-        android:layout_width="388dp"
-        android:layout_height="215dp"
-        android:layout_gravity="center"
-        android:orientation="vertical">
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="60sp"
+            android:layout_height="30sp"
+            android:layout_gravity="bottom"
+            android:layout_weight="1"
+            android:background="#FFFFFF"
+            android:gravity="bottom|top"
+            android:text="   ENFP들이 가장 좋아하는 음악."
+            android:textColor="#837676"
+            android:textSize="16sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="43dp"
-            android:orientation="horizontal">
+        <ImageButton
+            android:id="@+id/imageButton5"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="bottom"
+            android:background="#FFFFFF"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/setting" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="60sp"
-                android:layout_height="30sp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1"
-                android:background="#FFFFFF"
-                android:gravity="bottom|top"
-                android:text="   ENFP들이 가장 좋아하는 음악."
-                android:textColor="#837676"
-                android:textSize="16sp" />
-
-            <ImageButton
-                android:id="@+id/imageButton5"
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="bottom"
-                android:background="#FFFFFF"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/setting" />
-        </LinearLayout>
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0">
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="109dp"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="horizontal">
 
             <LinearLayout
@@ -96,7 +90,7 @@
                 android:layout_height="match_parent"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/button16"
@@ -116,7 +110,7 @@
                 android:layout_height="match_parent"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/button17"
@@ -136,7 +130,7 @@
                 android:layout_height="match_parent"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/button18"
@@ -156,7 +150,7 @@
                 android:layout_height="match_parent"
                 android:background="#FFFFFF"
                 android:gravity="center"
-                android:orientation="horizontal" >
+                android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/button19"
@@ -171,12 +165,11 @@
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
-
-    </LinearLayout>
+    </HorizontalScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"></LinearLayout>
+        android:orientation="vertical"/>
 
 </LinearLayout>
