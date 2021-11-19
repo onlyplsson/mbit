@@ -110,7 +110,7 @@ public class ISFPActivity extends AppCompatActivity {
             @Override public void onClick(DialogInterface dialogInterface, int i) {
                 dialogInterface.cancel();
                 // 취소를 누르면 이름을 입력할 때 까지 요청
-                createUserName();
+
             }
         });
         builder.show();
