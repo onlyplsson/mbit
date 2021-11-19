@@ -14,6 +14,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +31,9 @@ import java.util.Set;
 
 public class ISFPActivity extends AppCompatActivity {
 
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String username = user.getDisplayName();
+    String uid = user.getUid();
     ListView listviewISFP;
     Button btnMakeRoom;
     String name;
@@ -42,9 +47,9 @@ public class ISFPActivity extends AppCompatActivity {
         listviewISFP = findViewById(R.id.listview_ISFP);
         btnMakeRoom = findViewById(R.id.btn_MakeRoom);
 
+
+
         final ArrayList<String> list_ISFP = new ArrayList<>();
-
-
         final ArrayAdapter<String> adapter_ISFP = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list_ISFP);
         listviewISFP.setAdapter(adapter_ISFP);
 
@@ -74,6 +79,7 @@ public class ISFPActivity extends AppCompatActivity {
         listviewISFP.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                reference_ISFP.child(((TextView) view).getText().toString()).child("users").child(username).setValue(uid);
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                 intent.putExtra("room_name", ((TextView) view).getText().toString());
                 startActivity(intent);
@@ -101,8 +107,11 @@ public class ISFPActivity extends AppCompatActivity {
                 map.put(name, "");
                 reference_ISFP.updateChildren(map);
 
+
+                reference_ISFP.child(name).child("users").child(username).setValue(uid);
+
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-                intent.putExtra("room_name", name);//이부분부터 다시
+                intent.putExtra("room_name", name);
                 startActivity(intent);
             }
         });
