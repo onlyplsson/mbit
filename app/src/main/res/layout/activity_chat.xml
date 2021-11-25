@@ -4,24 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ECF8FF"
     android:orientation="vertical"
     tools:context=".ChatActivity">
 
-    <TextView
-        android:id="@+id/tv_RoomName"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:textSize="30sp" />
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/listview_Users"
-        android:layout_width="match_parent"
-        android:layout_height="524dp" />
+        <TextView
+            android:id="@+id/tv_RoomName"
+            android:layout_width="360dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:text="채팅방 이름"
+            android:textSize="20sp" />
 
-    <Button
-        android:id="@+id/btn_Quit"
-        android:layout_width="match_parent"
+        <ListView
+            android:id="@+id/listview_Users"
+            android:layout_width="match_parent"
+            android:layout_height="520dp"
+            android:layout_marginTop="20dp"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:text="나가기" />
+        android:layout_gravity="center"
+        android:gravity="right"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_Quit"
+            android:layout_width="99dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFEB3B"
+            android:text="방 나가기"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -36,6 +37,7 @@ public class ISFPActivity extends AppCompatActivity {
     String uid = user.getUid();
     ListView listviewISFP;
     Button btnMakeRoom;
+    TextView tvRoomList;
     String name;
     private DatabaseReference reference_ISFP = FirebaseDatabase.getInstance().getReference().getRoot();
 
@@ -46,27 +48,29 @@ public class ISFPActivity extends AppCompatActivity {
 
         listviewISFP = findViewById(R.id.listview_ISFP);
         btnMakeRoom = findViewById(R.id.btn_MakeRoom);
+        tvRoomList = findViewById(R.id.tv_RoomList);
+
+        RoomList roomList = new RoomList(ISFPActivity.this);
+        listviewISFP.setAdapter(roomList);
 
 
-
-        final ArrayList<String> list_ISFP = new ArrayList<>();
-        final ArrayAdapter<String> adapter_ISFP = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list_ISFP);
-        listviewISFP.setAdapter(adapter_ISFP);
 
         reference_ISFP.addValueEventListener(new ValueEventListener() {
             @Override public void onDataChange(DataSnapshot dataSnapshot) {
 
-                Set<String> set = new HashSet<String>();
+                roomList.rooms.clear();
                 Iterator i = dataSnapshot.getChildren().iterator();
-
                 while (i.hasNext()) {
-                    set.add(((DataSnapshot) i.next()).getKey());
+                    String sTitle = ((DataSnapshot)i.next()).getKey();
+                    int nCount = 0;
+                    if(dataSnapshot.child(sTitle).child("user_count").getValue(int.class) == null) {
+
+                    } else {
+                        nCount = dataSnapshot.child(sTitle).child("user_count").getValue(int.class);
+                    }
+                    roomList.addRoom(sTitle, nCount);
                 }
-
-                list_ISFP.clear();
-                list_ISFP.addAll(set);
-
-                adapter_ISFP.notifyDataSetChanged();
+                roomList.notifyDataSetChanged();
             }
 
             @Override
@@ -79,9 +83,16 @@ public class ISFPActivity extends AppCompatActivity {
         listviewISFP.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                reference_ISFP.child(((TextView) view).getText().toString()).child("users").child(username).setValue(uid);
+                Room r = (Room)roomList.getItem(i);
+                if(r.getsCurrCount() >= 8) {
+                    Toast.makeText(getApplicationContext(), "방이 꽉 찼습니다.", Toast.LENGTH_SHORT).show();
+                    return;
+                } else{
+
+                }
+                reference_ISFP.child(r.getsRoomTitle()).child("users").child(username).setValue(uid);
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-                intent.putExtra("room_name", ((TextView) view).getText().toString());
+                intent.putExtra("room_name", r.getsRoomTitle());
                 startActivity(intent);
             }
         });
@@ -94,14 +105,14 @@ public class ISFPActivity extends AppCompatActivity {
     }
     private void createUserName() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("채팅방에 사용할 이름을 입력하세요");
+        builder.setTitle("방 제목");
 
         final EditText builder_input = new EditText(this);
 
         builder.setView(builder_input);
         builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
             @Override public void onClick(DialogInterface dialogInterface, int i) {
-                name = builder_input.getText().toString();
+                name = builder_input.getText().toString().trim();
 
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put(name, "");

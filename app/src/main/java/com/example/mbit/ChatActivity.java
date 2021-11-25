@@ -24,12 +24,12 @@ import java.util.ArrayList;
 public class ChatActivity extends AppCompatActivity {
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String username = user.getDisplayName();
-
+    String sUsername = user.getDisplayName();
+    int nUserCount;
     TextView tvRoomName;
     ListView listviewUsers;
     Button btnQuit;
-
+    private DatabaseReference reference_ISFP = FirebaseDatabase.getInstance().getReference().getRoot();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +50,7 @@ public class ChatActivity extends AppCompatActivity {
         listviewUsers.setAdapter(adapter_User);
 
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference(room_name).child("users");
+
         userReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -60,7 +61,16 @@ public class ChatActivity extends AppCompatActivity {
                     list_User.add(users);
                     //adapter_User.add(users);
                 }
+
                 adapter_User.notifyDataSetChanged();
+                nUserCount = list_User.size();
+                if (nUserCount == 0) {
+                    reference_ISFP.child(room_name).child("user_count").setValue(null);
+                } else {
+                    reference_ISFP.child(room_name).child("user_count").setValue(nUserCount);
+                }
+
+
             }
 
             @Override
@@ -72,8 +82,8 @@ public class ChatActivity extends AppCompatActivity {
         btnQuit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userReference.child(username).setValue(null);
-                list_User.remove(userReference.child(username).getKey());
+                userReference.child(sUsername).setValue(null);
+                list_User.remove(userReference.child(sUsername).getKey());
                 onBackPressed();
             }
         });
