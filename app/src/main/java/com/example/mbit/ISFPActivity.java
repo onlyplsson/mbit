@@ -1,5 +1,6 @@
 package com.example.mbit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,8 +16,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +40,7 @@ public class ISFPActivity extends AppCompatActivity {
     String username = user.getDisplayName();
     String uid = user.getUid();
     ListView listviewISFP;
-    Button btnMakeRoom;
+    Button btnMakeRoom, btnChangeNick;
     TextView tvRoomList;
     String name;
     private DatabaseReference reference_ISFP = FirebaseDatabase.getInstance().getReference().getRoot();
@@ -48,12 +52,18 @@ public class ISFPActivity extends AppCompatActivity {
 
         listviewISFP = findViewById(R.id.listview_ISFP);
         btnMakeRoom = findViewById(R.id.btn_MakeRoom);
+        btnChangeNick = findViewById(R.id.btn_ChangeNick);
         tvRoomList = findViewById(R.id.tv_RoomList);
 
         RoomList roomList = new RoomList(ISFPActivity.this);
         listviewISFP.setAdapter(roomList);
 
-
+        btnChangeNick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeNick();
+            }
+        });
 
         reference_ISFP.addValueEventListener(new ValueEventListener() {
             @Override public void onDataChange(DataSnapshot dataSnapshot) {
@@ -88,7 +98,7 @@ public class ISFPActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "방이 꽉 찼습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 } else{
-
+                    
                 }
                 reference_ISFP.child(r.getsRoomTitle()).child("users").child(username).setValue(uid);
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
@@ -102,6 +112,43 @@ public class ISFPActivity extends AppCompatActivity {
                 createUserName();
             }
         });
+    }
+    private  void changeNick() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("닉네임 변경");
+
+        final EditText builder_input = new EditText(this);
+
+        builder.setView(builder_input);
+        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialogInterface, int i) {
+                String nick = builder_input.getText().toString().trim();
+                if (nick.length() > 0) {
+                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                            .setDisplayName(nick)
+                            .build();
+
+                    if (user != null) {
+                        user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    username = nick;
+                                }
+                            }
+                        });
+                    }
+                }
+            }
+        });
+        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
+            @Override public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        builder.show();
     }
     private void createUserName() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
