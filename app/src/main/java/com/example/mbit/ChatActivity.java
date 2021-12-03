@@ -27,7 +27,7 @@ public class ChatActivity extends AppCompatActivity {
     String sUsername = user.getDisplayName();
     int nUserCount;
     TextView tvRoomName;
-    ListView listviewUsers;
+    ListView listviewUsers, listviewChat;
     Button btnQuit;
     private DatabaseReference reference_ISFP = FirebaseDatabase.getInstance().getReference().getRoot();
 
@@ -39,6 +39,7 @@ public class ChatActivity extends AppCompatActivity {
 
         tvRoomName = findViewById(R.id.tv_RoomName);
         listviewUsers = findViewById(R.id.listview_Users);
+        listviewChat = findViewById(R.id.listview_Chat);
         btnQuit = findViewById(R.id.btn_Quit);
 
         Intent intent = getIntent();
@@ -48,6 +49,10 @@ public class ChatActivity extends AppCompatActivity {
         final ArrayList<String> list_User = new ArrayList<>();
         final ArrayAdapter<String> adapter_User = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list_User);
         listviewUsers.setAdapter(adapter_User);
+
+        final ArrayList<String> list_Chat = new ArrayList<>();
+        final ArrayAdapter<String> adapter_Chat = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list_Chat);
+        listviewUsers.setAdapter(adapter_Chat);
 
         DatabaseReference userReference = FirebaseDatabase.getInstance().getReference(room_name).child("users");
 

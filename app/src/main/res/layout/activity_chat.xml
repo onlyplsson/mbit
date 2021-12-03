@@ -28,9 +28,21 @@
         <ListView
             android:id="@+id/listview_Users"
             android:layout_width="match_parent"
-            android:layout_height="520dp"
+            android:layout_height="259dp"
             android:layout_marginTop="20dp"
             android:visibility="visible" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="380dp"
+        android:layout_height="194dp"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <ListView
+            android:id="@+id/listview_Chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <LinearLayout
@@ -39,6 +51,27 @@
         android:layout_gravity="center"
         android:gravity="right"
         android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/ed_Chat"
+                android:layout_width="271dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginRight="20dp"
+                android:ems="10"
+                android:inputType="textPersonName" />
+
+            <Button
+                android:id="@+id/btn_Send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전송" />
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_Quit"

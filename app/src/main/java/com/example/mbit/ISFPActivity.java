@@ -94,7 +94,7 @@ public class ISFPActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 Room r = (Room)roomList.getItem(i);
-                if(r.getsCurrCount() >= 8) {
+                if(r.getsCurrCount() >= 4) {
                     Toast.makeText(getApplicationContext(), "방이 꽉 찼습니다.", Toast.LENGTH_SHORT).show();
                     return;
                 } else{

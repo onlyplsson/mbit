@@ -44,7 +44,7 @@
                 android:id="@+id/tv_MaxCount"
                 android:layout_width="30sp"
                 android:layout_height="30sp"
-                android:text="8"
+                android:text="4"
                 android:textAlignment="center"
                 android:textSize="20sp" />
         </LinearLayout>
