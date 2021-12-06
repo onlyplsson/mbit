@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +28,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -40,10 +43,20 @@ public class ISFPActivity extends AppCompatActivity {
     String username = user.getDisplayName();
     String uid = user.getUid();
     ListView listviewISFP;
-    Button btnMakeRoom, btnChangeNick;
+    Button btnMakeRoom;
+    ImageButton btnSetting;
     TextView tvRoomList;
     String name;
-    private DatabaseReference reference_ISFP = FirebaseDatabase.getInstance().getReference().getRoot();
+    private DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
+
+    private String getTime() {
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+        String getTime = dateFormat.format(date);
+
+        return getTime;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,31 +65,26 @@ public class ISFPActivity extends AppCompatActivity {
 
         listviewISFP = findViewById(R.id.listview_ISFP);
         btnMakeRoom = findViewById(R.id.btn_MakeRoom);
-        btnChangeNick = findViewById(R.id.btn_ChangeNick);
+        btnSetting = findViewById(R.id.btn_Setting);
+
         tvRoomList = findViewById(R.id.tv_RoomList);
 
         RoomList roomList = new RoomList(ISFPActivity.this);
         listviewISFP.setAdapter(roomList);
 
-        btnChangeNick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeNick();
-            }
-        });
 
-        reference_ISFP.addValueEventListener(new ValueEventListener() {
+        myRef.addValueEventListener(new ValueEventListener() {
             @Override public void onDataChange(DataSnapshot dataSnapshot) {
 
                 roomList.rooms.clear();
-                Iterator i = dataSnapshot.getChildren().iterator();
+                Iterator i = dataSnapshot.child("rooms").getChildren().iterator();
                 while (i.hasNext()) {
                     String sTitle = ((DataSnapshot)i.next()).getKey();
                     int nCount = 0;
-                    if(dataSnapshot.child(sTitle).child("user_count").getValue(int.class) == null) {
+                    if(dataSnapshot.child("rooms").child(sTitle).child("user_count").getValue(int.class) == null) {
 
                     } else {
-                        nCount = dataSnapshot.child(sTitle).child("user_count").getValue(int.class);
+                        nCount = dataSnapshot.child("rooms").child(sTitle).child("user_count").getValue(int.class);
                     }
                     roomList.addRoom(sTitle, nCount);
                 }
@@ -100,7 +108,8 @@ public class ISFPActivity extends AppCompatActivity {
                 } else{
                     
                 }
-                reference_ISFP.child(r.getsRoomTitle()).child("users").child(username).setValue(uid);
+                myRef.child("rooms").child(r.getsRoomTitle()).child("chats").child(getTime()).setValue(username + " 님이 들어왔습니다.");
+                myRef.child("rooms").child(r.getsRoomTitle()).child("users").child(uid).child("nick").setValue(username);
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                 intent.putExtra("room_name", r.getsRoomTitle());
                 startActivity(intent);
@@ -109,48 +118,19 @@ public class ISFPActivity extends AppCompatActivity {
         btnMakeRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createUserName();
+                createRoom();
+            }
+        });
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ISFPActivity.this, SettingActivity.class);
+                startActivity(intent);
             }
         });
     }
-    private  void changeNick() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("닉네임 변경");
 
-        final EditText builder_input = new EditText(this);
-
-        builder.setView(builder_input);
-        builder.setPositiveButton("확인", new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialogInterface, int i) {
-                String nick = builder_input.getText().toString().trim();
-                if (nick.length() > 0) {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                    UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                            .setDisplayName(nick)
-                            .build();
-
-                    if (user != null) {
-                        user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    username = nick;
-                                }
-                            }
-                        });
-                    }
-                }
-            }
-        });
-        builder.setNegativeButton("취소", new DialogInterface.OnClickListener() {
-            @Override public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-        builder.show();
-    }
-    private void createUserName() {
+    private void createRoom() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("방 제목");
 
@@ -163,10 +143,26 @@ public class ISFPActivity extends AppCompatActivity {
 
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put(name, "");
-                reference_ISFP.updateChildren(map);
+                myRef.child("rooms").updateChildren(map);
+                myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        if(snapshot.exists()) {
+                            Toast.makeText(getApplicationContext(), "존재합니다", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
 
 
-                reference_ISFP.child(name).child("users").child(username).setValue(uid);
+
+
+                myRef.child("rooms").child(name).child("users").child(uid).child("nick").setValue(username);
 
                 Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
                 intent.putExtra("room_name", name);

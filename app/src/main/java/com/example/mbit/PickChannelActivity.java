@@ -14,23 +14,16 @@ import com.google.firebase.auth.UserInfo;
 
 public class PickChannelActivity extends AppCompatActivity {
 
-    Button btnLogout2, btnISFP;
+    Button btnISFP;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pickchannel);
 
-        btnLogout2 = findViewById(R.id.btn_Logout2);
+
         btnISFP = findViewById(R.id.btn_ISFP);
 
-        btnLogout2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                startWelcomeActivity();
-            }
-        });
         btnISFP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,8 +32,5 @@ public class PickChannelActivity extends AppCompatActivity {
             }
         });
     }
-    private void startWelcomeActivity() {
-        Intent intent = new Intent(this, WelcomeActivity.class);
-        startActivity(intent);
-    }
+
 }

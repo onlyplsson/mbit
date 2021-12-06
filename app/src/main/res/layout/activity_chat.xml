@@ -12,24 +12,39 @@
         android:layout_width="380dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:background="#FFFFFF"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/tv_RoomName"
-            android:layout_width="360dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="10dp"
-            android:text="채팅방 이름"
-            android:textSize="20sp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:id="@+id/tv_RoomName"
+                android:layout_width="263dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:paddingTop="10dp"
+                android:text="채팅방 이름"
+                android:textSize="20sp" />
+
+            <Button
+                android:id="@+id/btn_Quit"
+                android:layout_width="99dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFEB3B"
+                android:text="방 나가기"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </LinearLayout>
 
         <ListView
             android:id="@+id/listview_Users"
             android:layout_width="match_parent"
             android:layout_height="259dp"
-            android:layout_marginTop="20dp"
             android:visibility="visible" />
     </LinearLayout>
 
@@ -44,7 +59,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_Chat"
             android:layout_width="match_parent"
-            android:layout_height="170dp" />
+            android:layout_height="match_parent" />
     </LinearLayout>
 
     <LinearLayout
@@ -72,17 +87,13 @@
                 android:id="@+id/btn_Send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="전송" />
+                android:backgroundTint="#FFEB3B"
+                android:enabled="false"
+                android:text="전송"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_Quit"
-            android:layout_width="99dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#FFEB3B"
-            android:text="방 나가기"
-            android:textSize="15sp"
-            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>

@@ -7,12 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,15 +26,31 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 
 public class ChatActivity extends AppCompatActivity {
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-    String sUsername = user.getDisplayName();
+    String username = user.getDisplayName();
+    String uid = user.getUid();
     int nUserCount;
     private String mChatNick;
     private String mChatContent;
+    String sChat;
+
+    private String getTime() {
+        long now = System.currentTimeMillis();
+        Date date = new Date(now);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+        String getTime = dateFormat.format(date);
+
+        return getTime;
+    }
+
+
     ArrayList<Chat> list_Chat;
 
     TextView tvRoomName;
@@ -40,7 +60,7 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView recyclerviewChat = null;
     ChatAdapter chatAdapter = null;
 
-    private DatabaseReference reference_ISFP = FirebaseDatabase.getInstance().getReference().getRoot();
+    private DatabaseReference myRef = FirebaseDatabase.getInstance().getReference();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,30 +86,33 @@ public class ChatActivity extends AppCompatActivity {
         list_Chat = new ArrayList<>();
         chatAdapter = new ChatAdapter(list_Chat);
         recyclerviewChat.setAdapter(chatAdapter);
-        recyclerviewChat.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+        //mLayoutManager.setReverseLayout(true);
+        //mLayoutManager.setStackFromEnd(true);
+        recyclerviewChat.setLayoutManager(mLayoutManager);
 
 
-        DatabaseReference userReference = FirebaseDatabase.getInstance().getReference(room_name).child("users");
 
-        userReference.addValueEventListener(new ValueEventListener() {
+
+        myRef.child("rooms").child(room_name).child("users").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list_User.clear();
+
                 for (DataSnapshot userData : snapshot.getChildren()) {
-                    String users = userData.getKey();
+                    String users = userData.child("nick").getValue(String.class);
 
                     list_User.add(users);
-                    //adapter_User.add(users);
                 }
 
                 adapter_User.notifyDataSetChanged();
+
                 nUserCount = list_User.size();
                 if (nUserCount == 0) {
-                    reference_ISFP.child(room_name).child("user_count").setValue(null);
+                    myRef.child("rooms").child(room_name).child("user_count").setValue(null);
                 } else {
-                    reference_ISFP.child(room_name).child("user_count").setValue(nUserCount);
+                    myRef.child("rooms").child(room_name).child("user_count").setValue(nUserCount);
                 }
-
 
             }
 
@@ -102,23 +125,80 @@ public class ChatActivity extends AppCompatActivity {
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                sChat = edChat.getText().toString().trim();
+                myRef.child("rooms").child(room_name).child("chats").child(getTime()).setValue(username + " : " + sChat);
+                edChat.setText("");
+            }
+        });
+
+        myRef.child("rooms").child(room_name).child("chats").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                list_Chat.clear();
+
+                for (DataSnapshot userData : snapshot.getChildren()) {
+                    String chat = userData.getValue(String.class);
+
+                    addItem(chat);
+                }
+
+                chatAdapter.notifyDataSetChanged();
+                recyclerviewChat.scrollToPosition(list_Chat.size()-1);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
         });
+
+
 
         btnQuit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                userReference.child(sUsername).setValue(null);
-                list_User.remove(userReference.child(sUsername).getKey());
+                myRef.child("rooms").child(room_name).child("chats").child(getTime()).setValue(username + " 님이 나갔습니다.");
+                myRef.child("rooms").child(room_name).child("users").child(uid).setValue(null);
+                list_User.remove(myRef.child("rooms").child(room_name).child("users").child(uid).getKey());
+
+                if(list_User.size()-1 == 0) {
+
+                    myRef.child("rooms").child(room_name).child("chats").setValue(null);
+                }
                 onBackPressed();
+            }
+        });
+
+        edChat.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.length() == 0) {
+                    btnSend.setEnabled(false);
+                } else {
+                    btnSend.setEnabled(true);
+                }
             }
         });
 
 
 
 
+    }
+    public  void addItem (String content) {
+        Chat c = new Chat();
 
+        c.setsChatConetent(content);
 
+        list_Chat.add(c);
     }
 }

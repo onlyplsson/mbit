@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Mbit">
         <activity
+            android:name=".SettingActivity"
+            android:exported="true" />
+        <activity
             android:name=".ChatActivity"
             android:exported="true" />
         <activity
@@ -20,21 +23,22 @@
         <activity
             android:name=".PickChannelActivity"
             android:exported="true">
+
+        </activity>
+        <activity
+            android:name=".IntroActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".IntroActivity"
-            android:exported="true"></activity>
         <activity android:name=".SignInActivity" />
         <activity android:name=".WelcomeActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SetNickActivity" />
         <activity android:name=".Configuration" />
-        <activity android:name=".MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

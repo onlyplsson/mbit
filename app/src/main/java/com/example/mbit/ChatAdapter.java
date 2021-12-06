@@ -19,13 +19,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView nick;
         TextView content;
 
         ViewHolder(View itemView) {
             super(itemView);
 
-            nick = itemView.findViewById(R.id.tv_ChatNick);
             content = itemView.findViewById(R.id.tv_ChatContent);
         }
     }
@@ -46,7 +44,6 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Chat chat = mData.get(position);
 
-        holder.nick.setText(chat.getsChatNick());
         holder.content.setText(chat.getsChatConetent());
     }
 
@@ -55,6 +52,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     public int getItemCount() {
         return mData.size();
     }
+
+
 
 
 
