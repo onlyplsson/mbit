@@ -21,6 +21,52 @@
             android:name=".ISFPActivity"
             android:exported="true" />
         <activity
+            android:name=".ISFJActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ISTJActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ISTPActivity"
+            android:exported="true" />
+        <activity
+            android:name=".INTPActivity"
+            android:exported="true" />
+        <activity
+            android:name=".INTJActivity"
+            android:exported="true" />
+        <activity
+            android:name=".INFJActivity"
+            android:exported="true" />
+        <activity
+            android:name=".INFPActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ESFJActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ESFPActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ESTJActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ESTPActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ENFJActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ENFPActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ENTJActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ENTPActivity"
+            android:exported="true" />
+
+        <activity
             android:name=".PickChannelActivity"
             android:exported="true">
 

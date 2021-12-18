@@ -37,8 +37,6 @@ public class ChatActivity extends AppCompatActivity {
     String username = user.getDisplayName();
     String uid = user.getUid();
     int nUserCount;
-    private String mChatNick;
-    private String mChatContent;
     String sChat;
 
     private String getTime() {
@@ -76,7 +74,8 @@ public class ChatActivity extends AppCompatActivity {
         recyclerviewChat = findViewById(R.id.recyclerview_Chat);
 
         Intent intent = getIntent();
-        String room_name = intent.getExtras().get("room_name").toString();
+        String room_name = intent.getStringExtra("room_name");
+        String ch_name = intent.getStringExtra("ch_name");
         tvRoomName.setText(room_name);
 
         final ArrayList<String> list_User = new ArrayList<>();
@@ -91,7 +90,7 @@ public class ChatActivity extends AppCompatActivity {
         //mLayoutManager.setStackFromEnd(true);
         recyclerviewChat.setLayoutManager(mLayoutManager);
 
-
+        myRef = myRef.child(ch_name);
 
 
         myRef.child("rooms").child(room_name).child("users").addValueEventListener(new ValueEventListener() {

@@ -188,7 +188,7 @@
                     tools:layout_editor_absoluteY="2dp" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/ESTJ"
+                    android:id="@+id/btn_ESTJ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10sp"
@@ -278,7 +278,7 @@
                     tools:layout_editor_absoluteY="2dp" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/ENFJ"
+                    android:id="@+id/btn_ENFJ"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10sp"

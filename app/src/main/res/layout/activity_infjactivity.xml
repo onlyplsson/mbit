@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="#FFFFFF"
-            android:text="ISFP"
+            android:text="INFJ"
             android:textAlignment="center"
             android:textColor="#FFEB3B"
             android:textSize="30dp"

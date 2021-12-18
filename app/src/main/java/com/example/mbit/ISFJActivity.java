@@ -1,6 +1,5 @@
 package com.example.mbit;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -30,7 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ISFPActivity extends AppCompatActivity {
+public class ISFJActivity extends AppCompatActivity {
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String username = user.getDisplayName();
@@ -54,7 +53,7 @@ public class ISFPActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_isfpactivity);
+        setContentView(R.layout.activity_isfjactivity);
 
         listview = findViewById(R.id.listview);
         btnMakeRoom = findViewById(R.id.btn_MakeRoom);
@@ -65,7 +64,7 @@ public class ISFPActivity extends AppCompatActivity {
         sChName = tvChName.getText().toString();
         myRef = myRef.child(sChName);
 
-        RoomList roomList = new RoomList(ISFPActivity.this);
+        RoomList roomList = new RoomList(ISFJActivity.this);
         listview.setAdapter(roomList);
 
 
@@ -121,7 +120,7 @@ public class ISFPActivity extends AppCompatActivity {
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ISFPActivity.this, SettingActivity.class);
+                Intent intent = new Intent(ISFJActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
         });

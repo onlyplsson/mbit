@@ -1,9 +1,5 @@
 package com.example.mbit;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +11,9 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,7 +29,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public class ISFPActivity extends AppCompatActivity {
+public class ENFPActivity extends AppCompatActivity {
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String username = user.getDisplayName();
@@ -54,7 +53,7 @@ public class ISFPActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_isfpactivity);
+        setContentView(R.layout.activity_enfpactivity);
 
         listview = findViewById(R.id.listview);
         btnMakeRoom = findViewById(R.id.btn_MakeRoom);
@@ -65,7 +64,7 @@ public class ISFPActivity extends AppCompatActivity {
         sChName = tvChName.getText().toString();
         myRef = myRef.child(sChName);
 
-        RoomList roomList = new RoomList(ISFPActivity.this);
+        RoomList roomList = new RoomList(ENFPActivity.this);
         listview.setAdapter(roomList);
 
 
@@ -121,7 +120,7 @@ public class ISFPActivity extends AppCompatActivity {
         btnSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ISFPActivity.this, SettingActivity.class);
+                Intent intent = new Intent(ENFPActivity.this, SettingActivity.class);
                 startActivity(intent);
             }
         });
